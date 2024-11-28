@@ -2,13 +2,14 @@ package fr.keyce;
 
 import java.util.Scanner;
 
-import fr.keyce.openit.Computer;
+import fr.keyce.openit.DefaultComputer;
+import fr.keyce.openit.MaterialInterface;
 import fr.keyce.openit.apple.AppleComputer;
 import fr.keyce.openit.ibm.IBMComputer;
 
 public class Menu {
 
-	private Computer[] computers = new Computer[0];
+	private MaterialInterface[] materials = new MaterialInterface[0];
 
 	public void displayMenu() {
 		String str;
@@ -47,8 +48,8 @@ public class Menu {
 	}
 
 	private void displayComputers() {
-		for (int i = 0; i < computers.length; i++) {
-			System.out.println(i + " - " + computers[i]);
+		for (int i = 0; i < materials.length; i++) {
+			System.out.println(i + " - " + materials[i]);
 		}
 	}
 
@@ -60,14 +61,14 @@ public class Menu {
 		System.out.println("1 - Créer un ordinateur IBM");
 		System.out.println("2 - Créer un ordinateur Apple");
 		String type = sc.nextLine();
-		Computer computer = addComputer(type);
+		MaterialInterface computer = addComputer(type);
 		computer.setName(name);
 		computer.setSerialNumber(serialNumber);
 		System.out.println("Votre Ordinateur a été ajouté");
 	}
 
 	private void displayMenuRemoveComputer(Scanner sc) {
-		if(computers.length==0) {
+		if(materials.length==0) {
 			System.out.println("Il n'y a pas d'ordinateur a supprimer");
 			return;
 		}
@@ -79,7 +80,7 @@ public class Menu {
 	}
 
 	private void displayMenuModifyComputer(Scanner sc) {
-		if(computers.length==0) {
+		if(materials.length==0) {
 			System.out.println("Il n'y a pas d'ordinateur a modifier");
 			return;
 		}
@@ -90,44 +91,44 @@ public class Menu {
 		String name = sc.nextLine();
 		System.out.println("Entrez le numéro de série de l'ordinateur : ");
 		String serialNumber = sc.nextLine();
-		Computer computer = computers[Integer.valueOf(computerId)];
+		MaterialInterface computer = materials[Integer.valueOf(computerId)];
 		computer.setName(name);
 		computer.setSerialNumber(serialNumber);
 
 	}
 
-	private Computer addComputer(String type) {
-		Computer[] newTab = new Computer[computers.length + 1];
-		for (int i = 0; i < computers.length; i++) {
-			newTab[i] = computers[i];
+	private MaterialInterface addComputer(String type) {
+		MaterialInterface[] newTab = new MaterialInterface[materials.length + 1];
+		for (int i = 0; i < materials.length; i++) {
+			newTab[i] = materials[i];
 		}
-		computers = newTab;
+		materials = newTab;
 		switch(type) {
 		case "1":
-			computers[computers.length - 1] = new IBMComputer();
+			materials[materials.length - 1] = new IBMComputer();
 			break;
 		case "2":
-			computers[computers.length - 1] = new AppleComputer();
+			materials[materials.length - 1] = new AppleComputer();
 			break;
 			default:
-				computers[computers.length - 1] = new Computer();
+				materials[materials.length - 1] = new DefaultComputer();
 				
 		}
-		return computers[computers.length - 1];
+		return materials[materials.length - 1];
 	}
 
 	private void removeComputer(int position) {
-		Computer[] newTab = new Computer[computers.length - 1];
-		for (int i = 0; i < computers.length; i++) {
+		MaterialInterface[] newTab = new MaterialInterface[materials.length - 1];
+		for (int i = 0; i < materials.length; i++) {
 			if (i != position) {
 				if (i > position) {
-					newTab[i - 1] = computers[i];
+					newTab[i - 1] = materials[i];
 				} else {
-					newTab[i] = computers[i];
+					newTab[i] = materials[i];
 				}
 			}
 		}
-		computers = newTab;
+		materials = newTab;
 	}
 
 }

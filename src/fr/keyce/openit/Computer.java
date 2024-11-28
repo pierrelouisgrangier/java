@@ -1,6 +1,6 @@
 package fr.keyce.openit;
 
-public class Computer {
+public abstract class Computer implements MaterialInterface{
 
 	private String name;
 	
@@ -9,6 +9,8 @@ public class Computer {
 	private Keyboard keyboard;
 
 	private Mouse mouse;
+	
+	private float price;
 
 	public Mouse getMouse() {
 		return mouse;
@@ -46,4 +48,16 @@ public class Computer {
 	public String toString() {
 		return "Computer " + name + " a le numéro de série : " + serialNumber;
 	}
+
+	@Override
+	public float getPrice() {
+		return price;
+	}
+
+	public void setPrice(float price) {
+		this.price = price;
+	}
+	
+	public abstract String instructionsGame();
+	
 }
