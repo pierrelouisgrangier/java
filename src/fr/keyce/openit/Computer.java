@@ -3,14 +3,8 @@ package fr.keyce.openit;
 public class Computer {
 
 	private String name;
+	
 	private String serialNumber;
-
-	public Computer() {
-	}
-
-	public Computer(Keyboard keyboard) {
-
-	}
 
 	private Keyboard keyboard;
 
@@ -50,6 +44,6 @@ public class Computer {
 
 	@Override
 	public String toString() {
-		return "Computer " + name + " a le numéro de série : "+serialNumber;
+		return "Computer " + name + " a le numéro de série : " + serialNumber;
 	}
 }

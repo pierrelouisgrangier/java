@@ -3,6 +3,8 @@ package fr.keyce;
 import java.util.Scanner;
 
 import fr.keyce.openit.Computer;
+import fr.keyce.openit.apple.AppleComputer;
+import fr.keyce.openit.ibm.IBMComputer;
 
 public class Menu {
 
@@ -55,7 +57,10 @@ public class Menu {
 		String name = sc.nextLine();
 		System.out.println("Entrez le numéro de série de l'ordinateur : ");
 		String serialNumber = sc.nextLine();
-		Computer computer = addComputer();
+		System.out.println("1 - Créer un ordinateur IBM");
+		System.out.println("2 - Créer un ordinateur Apple");
+		String type = sc.nextLine();
+		Computer computer = addComputer(type);
 		computer.setName(name);
 		computer.setSerialNumber(serialNumber);
 		System.out.println("Votre Ordinateur a été ajouté");
@@ -91,13 +96,23 @@ public class Menu {
 
 	}
 
-	private Computer addComputer() {
+	private Computer addComputer(String type) {
 		Computer[] newTab = new Computer[computers.length + 1];
 		for (int i = 0; i < computers.length; i++) {
 			newTab[i] = computers[i];
 		}
 		computers = newTab;
-		computers[computers.length - 1] = new Computer();
+		switch(type) {
+		case "1":
+			computers[computers.length - 1] = new IBMComputer();
+			break;
+		case "2":
+			computers[computers.length - 1] = new AppleComputer();
+			break;
+			default:
+				computers[computers.length - 1] = new Computer();
+				
+		}
 		return computers[computers.length - 1];
 	}
 
