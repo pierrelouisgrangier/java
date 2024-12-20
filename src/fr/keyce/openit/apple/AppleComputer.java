@@ -14,4 +14,9 @@ public class AppleComputer extends Computer {
 		return "ARM";
 	}
 
+	@Override
+	protected String getType() {
+		return "apple";
+	}
+
 }

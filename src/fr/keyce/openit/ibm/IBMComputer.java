@@ -13,4 +13,9 @@ public class IBMComputer extends Computer {
 	public String instructionsGame() {
 		return "x86";
 	}
+
+	@Override
+	protected String getType() {
+		return "ibm";
+	}
 }

@@ -7,4 +7,9 @@ public class DefaultComputer extends Computer{
 		return "unknow";
 	}
 
+	@Override
+	protected String getType() {
+		return "other";
+	}
+
 }

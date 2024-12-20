@@ -1,15 +1,36 @@
 package fr.keyce.openit;
 
-public abstract class Computer implements MaterialInterface{
+import fr.keyce.openit.apple.AppleComputer;
+import fr.keyce.openit.ibm.IBMComputer;
+
+public abstract class Computer implements MaterialInterface {
+
+	public static Computer transformCsvToComputer(String line) {
+		Computer computer = null;
+		String[] elems = line.split(";");
+		switch (elems[0]) {
+		case "ibm":
+			computer = new IBMComputer();
+			break;
+		case "apple":
+			computer = new AppleComputer();
+			break;
+		default:
+			computer = new DefaultComputer();
+		}
+		computer.setName(elems[1]);
+		computer.setSerialNumber(elems[2]);
+		return computer;
+	}
 
 	private String name;
-	
+
 	private String serialNumber;
 
 	private Keyboard keyboard;
 
 	private Mouse mouse;
-	
+
 	private float price;
 
 	public Mouse getMouse() {
@@ -49,6 +70,10 @@ public abstract class Computer implements MaterialInterface{
 		return "Computer " + name + " a le numéro de série : " + serialNumber;
 	}
 
+	public String toCSV() {
+		return getType() + ";" + name + ";" + serialNumber;
+	}
+
 	@Override
 	public float getPrice() {
 		return price;
@@ -57,7 +82,9 @@ public abstract class Computer implements MaterialInterface{
 	public void setPrice(float price) {
 		this.price = price;
 	}
-	
+
 	public abstract String instructionsGame();
-	
+
+	protected abstract String getType();
+
 }
